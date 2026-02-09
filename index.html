@@ -273,6 +273,43 @@
     /* Confetti canvas */
     #confetti{ position:fixed; inset:0; pointer-events:none; z-index:10; }
 
+    .yay{
+      position: fixed;
+      left: 50%;
+      top: 16%;
+      transform: translateX(-50%) scale(.9);
+      z-index: 40; /* above confetti */
+      font-weight: 1000;
+      letter-spacing: .06em;
+      font-size: clamp(34px, 6vw, 72px);
+      color: #ff2e6a;
+      text-shadow:
+        3px 3px 0 #000,
+        -3px 3px 0 #000,
+        3px -3px 0 #000,
+        -3px -3px 0 #000,
+        0 0 22px rgba(255,46,106,.30);
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .yay.show{
+      opacity: 1;
+      animation: yayPop 250ms ease-out 1, yayVibe 900ms ease-in-out infinite;
+    }
+    
+    @keyframes yayPop{
+      0%{ transform: translateX(-50%) scale(.7); filter: blur(2px); }
+      100%{ transform: translateX(-50%) scale(1); filter: blur(0px); }
+    }
+    
+    @keyframes yayVibe{
+      0%,100%{ transform: translateX(-50%) rotate(0deg) scale(1); }
+      25%{ transform: translateX(-50%) rotate(-3deg) scale(1.03); }
+      50%{ transform: translateX(-50%) rotate(3deg) scale(1.05); }
+      75%{ transform: translateX(-50%) rotate(-2deg) scale(1.03); }
+    }
+
     /* SABOTAGE button (reference vibe) */
     /* === SABOTAGE LOGO BUTTON (reference style) === */
     .sabotageBtn{
@@ -590,6 +627,7 @@
   <div class="hearts" id="hearts"></div>
   <div class="vignette"></div>
   <canvas id="confetti"></canvas>
+  <div class="yay" id="yay" aria-hidden="true">YAY! 🎉</div>
 
   <div class="inkCurtain" id="inkCurtain" aria-hidden="true">
     <div class="curtain"></div>
@@ -742,18 +780,29 @@
     const successMsg = document.getElementById('successMsg');
     const card = document.getElementById('card');
     const partyFriends = document.getElementById('partyFriends');
+    const yay = document.getElementById('yay');
 
     yesBtn.addEventListener('click', ()=>{
-    burstConfetti();
-    successMsg.classList.add('show');
-    yesBtn.disabled = true;
-    yesBtn.textContent = "YES ✅";
-    card.classList.remove('bounce');
-    void card.offsetWidth;
-    card.classList.add('bounce');
-  
-    partyFriends.classList.add('show');   // ✅ add this
-  });
+      burstConfetti();
+    
+      // show vibing YAY
+      yay.classList.add('show');
+    
+      successMsg.classList.add('show');
+      yesBtn.disabled = true;
+      yesBtn.textContent = "YES ✅";
+      card.classList.remove('bounce');
+      void card.offsetWidth;
+      card.classList.add('bounce');
+    
+      partyFriends.classList.add('show');
+    
+      // remove/hide sabotage button after YES
+      sabotageBtn.style.display = 'none';
+    
+      // optional: auto-hide YAY after a bit (keep or remove)
+      setTimeout(()=> yay.classList.remove('show'), 2200);
+    });
 
     // SABOTAGE = curtain + KO impact
     const sabotageBtn = document.getElementById('sabotageBtn');
