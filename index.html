@@ -133,7 +133,7 @@
       border:1px solid #ffffffbd;
       box-shadow: var(--shadow);
       text-align:center;
-      opacity:0;
+      opacity:1;
       transform: translateY(14px) scale(.98);
       animation: popIn 900ms cubic-bezier(.2,.9,.2,1) forwards;
       position:relative;
@@ -281,128 +281,78 @@
       bottom:18px;
       z-index:25;
       cursor:pointer;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
       border:0;
-      background: transparent;
+      background:transparent;
       padding:0;
     }
     
     .saboLogoBtn{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
       padding:14px 16px;
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(8,10,16,.95), rgba(3,4,8,.95));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 18px 44px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
-      min-width: 300px;
-      transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    
-    .saboLogoBtn::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(circle at 12% 40%, rgba(255,70,110,.25), transparent 45%),
-        radial-gradient(circle at 92% 20%, rgba(255,120,160,.18), transparent 50%),
-        linear-gradient(90deg, transparent, rgba(255,46,106,.08), transparent);
-      opacity:.85;
-      pointer-events:none;
-    }
-    
-    .saboLogoBtn:hover{
-      transform: translateY(-1px);
-      box-shadow:
-        0 22px 54px rgba(0,0,0,.34),
-        0 0 0 8px rgba(255,46,106,.10),
-        inset 0 1px 0 rgba(255,255,255,.08);
+      border-radius:22px;
+      background: rgba(10,10,14,.92);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 44px rgba(0,0,0,.30);
+      width: 360px;
     }
     
     .saboIconWrap{
-      width:74px;
-      height:74px;
-      border-radius:14px;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      overflow: visible;
+      width:64px;
+      height:64px;
+      border-radius:16px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
+                  linear-gradient(135deg, #ff4b77, #7a0017);
       display:grid;
       place-items:center;
+      overflow:hidden;
+      flex: 0 0 auto;
     }
     
     .saboIconImg{
-      width:92px;
-      height:92px;
+      width:64px;
+      height:64px;
       object-fit:contain;
-      transform: translateY(1px);
-      filter: drop-shadow(0 14px 16px rgba(0,0,0,.35));
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,.35));
     }
     
-    /* Title matches the reference vibe: bold + outline + hot glow */
     .saboTitleWrap{
       flex:1;
+      min-width:0;
       text-align:left;
       line-height:1.05;
     }
     
     .saboTitle{
       font-weight:1000;
-      letter-spacing:.10em;
+      letter-spacing:.08em;
       text-transform:uppercase;
-      font-size:20px;
+      font-size:18px;
       color:#ff2e6a;
-      text-shadow:
-        2px 2px 0 #000,
-        -2px 2px 0 #000,
-        2px -2px 0 #000,
-        -2px -2px 0 #000,
-        0 0 18px rgba(255,46,106,.35);
-      position:relative;
-    }
-    
-    /* “drippy ink” under the word */
-    .saboTitle::after{
-      content:"";
-      position:absolute;
-      left:0;
-      width:170px;
-      height:18px;
-      bottom:-10px;
-      background:
-        radial-gradient(circle at 8% 55%, rgba(255,46,106,.95) 0 6px, transparent 7px),
-        radial-gradient(circle at 20% 72%, rgba(140,0,28,.95) 0 8px, transparent 9px),
-        radial-gradient(circle at 38% 58%, rgba(255,46,106,.92) 0 7px, transparent 8px),
-        radial-gradient(circle at 58% 76%, rgba(140,0,28,.95) 0 9px, transparent 10px),
-        radial-gradient(circle at 78% 62%, rgba(255,46,106,.92) 0 7px, transparent 8px),
-        radial-gradient(circle at 92% 74%, rgba(140,0,28,.95) 0 8px, transparent 9px);
-      opacity:.95;
-      animation: saboDrip 1.35s ease-in-out infinite;
-      filter: blur(.15px);
-    }
-    
-    @keyframes saboDrip{
-      0%,100%{ transform: translateY(0); }
-      50%{ transform: translateY(2px); }
+      text-shadow: 2px 2px 0 #000;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     
     .saboSubtitle{
-      margin-top:8px;
+      margin-top:6px;
       font-size:12px;
-      font-weight:900;
+      font-weight:800;
       letter-spacing:.06em;
-      color: rgba(235,240,255,.78);
+      color: rgba(235,240,255,.75);
       text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     
     .saboState{
-      min-width:64px;
+      margin-left:auto;
+      min-width:74px;
       text-align:center;
-      padding:9px 12px;
+      padding:10px 14px;
       border-radius:999px;
       font-weight:1000;
       letter-spacing:.12em;
@@ -410,7 +360,6 @@
       color: rgba(235,240,255,.78);
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
-      transition: .14s ease;
     }
     
     .saboState.on{
@@ -420,21 +369,17 @@
       box-shadow: 0 0 0 8px rgba(255,46,106,.10);
     }
     
-    /* when sabotage is ON, make the whole button feel "danger" */
     .saboLogoBtn.danger{
-      filter: saturate(1.35) contrast(1.12) brightness(1.08);
       box-shadow:
-        0 28px 70px rgba(0,0,0,.42),
+        0 22px 60px rgba(0,0,0,.38),
         0 0 0 10px rgba(255,46,106,.14),
-        0 0 40px rgba(255,46,106,.28),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 0 38px rgba(255,46,106,.22);
       animation: dangerPulse 720ms ease-in-out infinite;
     }
-
     
     @keyframes dangerPulse{
-      0%,100%{ transform: translateY(0) scale(1); }
-      50%{ transform: translateY(-2px) scale(1.02); }
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.02); }
     }
 
 
